@@ -1,226 +1,225 @@
 # FSA CPL INTERNSHIP PROGRAM - JAVA FULLSTACK 2026
 
-> Tài liệu này dùng để **phổ biến chương trình cho học viên**  
-> Mục tiêu: giúp bạn hiểu rõ **lộ trình – cách học – cách đánh giá – bạn sẽ làm gì trong 12 tuần tới**
+> This document outlines the **program structure for interns**.  
+> Objective: To provide a clear understanding of the **roadmap, methodology, assessment, and expectations** over the next 12 weeks.
 
 ---
 
-## 1. Tổng quan nhanh
+## 1. Quick Overview
 
-- **Thời lượng:** 12 tuần – 5 ngày/tuần  
-- **Cấu trúc ngày học:**  
-  - Buổi sáng (AM): Tự học, làm bài, nghiên cứu  
-  - Buổi chiều (PM): Ngoài các hoạt động như buổi sáng, Trainer guide / workshop / review 3 buổi/tuần
-- **Trọng tâm chương trình:**  
-  - 4 tuần học nền tảng & tech stack  
-  - 8 tuần làm **CPL Project** theo Agile (Scrum)
+- **Duration:** 12 weeks – 5 days/week  
+- **Daily Structure:**  
+  - Morning (AM): Self-study, practice, and research.  
+  - Afternoon (PM): In addition to morning activities, includes Trainer-led guides / workshops / reviews (3 sessions/week).
+- **Program Focus:**  
+  - 4 weeks of Foundation Stack  
+  - 8 weeks of **CPL Project** using Agile (Scrum)
 
-🎯 **Mục tiêu cuối cùng:**  
-> Bạn có thể tham gia **dự án Java/Spring thực tế ở mức Junior**, không chỉ “biết học” mà **làm được việc**.
+🎯 **Ultimate Goal:**  
+> To equip you with the skills required for **Junior-level Java/Spring projects**, focusing on professional execution and work-readiness.
 
 ---
 
-## 2. Lộ trình tổng thể 12 tuần
+## 2. 12-Week Roadmap
 
-| Giai đoạn | Tuần | Nội dung chính |
+| Phase | Week | Primary Focus |
 |---------|------|----------------|
-| Orientation | Day 1 | Giới thiệu & quản lý lớp |
-| Foundation & Tech Stack | 1 – 4 | Học các môn nền tảng |
-| CPL Project – Sprint 1 | 5 – 6 | System Foundation |
-| CPL Project – Sprint 2 | 7 – 8 | Core Business Logic |
-| CPL Project – Sprint 3 | 9 – 10 | Feature Completion |
-| CPL Project – Sprint 4 | 11 – 12 | Stabilization & Defense |
+| Orientation | Day 1 | Introduction & Program Management |
+| Foundation Stack | 1 – 4 | Core Technology Modules |
+| CPL Project – Sprint 1 | 5 – 6 | Infrastructure & Planning |
+| CPL Project – Sprint 2 | 7 – 8 | Feature Development |
+| CPL Project – Sprint 3 | 9 – 10 | System Integration |
+| CPL Project – Sprint 4 | 11 – 12 | Stabilization & Review |
 
 ---
 
-## 3. Các môn học (Tuần 1–4)
+## 3. Curriculum (Weeks 1–4)
 
 ### 3.1. Database Fundamentals & SQL
 
-**Nội dung chính**
+**Key Topics**
 - Relational database & schema design
 - ERD, normalization
 - SQL: SELECT, JOIN, GROUP BY, SUBQUERY
-- Index & performance cơ bản
+- Basic Indexing & performance optimization
 
 **Outcome**
-- Thiết kế được DB cho bài toán thực
-- Viết SQL đúng & hiệu quả
+- Design production-ready databases
+- Write efficient and optimized SQL queries
 
 ---
 
 ### 3.2. Version Control System & Agile
 
-**Nội dung chính**
-- Git cơ bản & Gitflow
-- Pull Request & Code Review
+**Key Topics**
+- Git fundamentals & Gitflow
+- Pull Requests & Code Review
 - Agile / Scrum framework
 
 **Outcome**
-- Làm việc nhóm đúng quy trình
-- Sử dụng Git như trong doanh nghiệp
+- Professional teamwork and collaboration
+- Enterprise-standard Git usage
 
 ---
 
-### 3.3. Data Structures & Algorithms – Fundamental
+### 3.3. Data Structures & Algorithms – Fundamentals
 
-**Nội dung chính**
-- Big-O (tư duy, không toán nặng)
-- Array, List, Map, Set
-- Áp dụng DSA vào xử lý dữ liệu
+**Key Topics**
+- Big-O notation (conceptual)
+- Arrays, Lists, Maps, Sets
+- Practical DSA application in data processing
 
 **Outcome**
-- Biết **chọn cấu trúc dữ liệu phù hợp**, không code cảm tính
+- Selecting appropriate data structures for optimal performance
 
 ---
 
 ### 3.4. Java SE / Java Language Programming
 
-**Nội dung chính**
-- OOP, SOLID
-- Collections, Exception handling
-- Clean code & coding convention
+**Key Topics**
+- OOP principles, SOLID
+- Collections framework, Exception handling
+- Clean code practices & coding conventions
 
 **Outcome**
-- Viết Java code **dễ đọc – dễ bảo trì**
-- Sẵn sàng cho Spring Framework
+- Writing readable and maintainable Java code
+- Readiness for Spring Framework integration
 
 ---
 
 ### 3.5. Java Spring Framework
 
-**Nội dung chính**
+**Key Topics**
 - Spring Boot
-- RESTful API
+- RESTful APIs
 - Spring Data JPA
 - Validation & exception handling
 
 **Outcome**
-- Xây dựng được backend service hoàn chỉnh
-- Hiểu cấu trúc project Spring thực tế
+- Building complete backend services
+- Understanding real-world Spring project architecture
 
 ---
 
 ### 3.6. Front-End Essentials
 
-**Nội dung chính**
-- HTML, CSS cơ bản
+**Key Topics**
+- HTML & CSS fundamentals
 - JavaScript fundamentals
-- Gọi REST API từ frontend
+- Consuming REST APIs from the frontend
 
 **Outcome**
-- Hiểu frontend để phối hợp với backend
-- Không phải full-time FE, nhưng **không mù FE**
+- Effective cross-functional collaboration with frontend teams
+- Competence in basic frontend integration
 
 ---
 
 ### 3.7. AI Augmented for Students
 
-**Nội dung chính**
-- Prompting cho code, debug, test
-- Giới hạn & rủi ro của AI
+**Key Topics**
+- AI Prompting for coding, debugging, and testing
+- Limitations & risks of AI
 - Ethics & responsible usage
 
 **Outcome**
-- Dùng AI như **trợ lý kỹ thuật**
-- Tránh lệ thuộc hoặc gian lận
+- Leveraging AI as a technical assistant
+- Maintaining integrity and avoiding over-reliance
 
 ---
 
-## 4. Phương pháp đào tạo
+## 4. Training Methodology
 
-### 4.1. Mô hình học tập
+### 4.1. Learning Model
 
-- **Self-learning (chủ đạo)**  
-  - Đọc tài liệu, xem guide, làm bài
-- **Trainer guide / review**
-  - Định hướng, sửa sai, nâng tầm
-- **Workshop**
-  - Làm bài thực tế, thảo luận
-- **Project-based learning**
-  - Áp dụng toàn bộ kiến thức vào CPL Project
+- **Self-learning (Primary)**  
+  - Documentation, guides, and assignments.
+- **Trainer Guidance / Review**
+  - Direction, correction, and mentoring.
+- **Workshops**
+  - Practical exercises and group discussions.
+- **Project-based Learning**
+  - Applying all knowledge to the CPL Project.
 
 ---
 
-### 4.2. Cách tổ chức 1 ngày học
+### 4.2. Daily Schedule
 
-| Thời gian | Hoạt động |
+| Time | Activity |
 |--------|----------|
-| Sáng (AM) | Học viên tự học, làm quiz / assignment theo các hướng dẫn của Trainer từ trước |
-| Chiều (PM) | Ngoài các hoạt động như buổi sáng, Trainer guide / workshop / review 3 buổi/tuần |
+| Morning (AM) | Self-study, quizzes, and assignments based on Trainer guidance. |
+| Afternoon (PM) | Continued development, Trainer-led guides / workshops / reviews (3 sessions/week). |
 
 ---
 
-## 5. CPL Project – 8 tuần (Tuần 5–12)
+## 5. CPL Project – 8 Weeks (Weeks 5–12)
 
-**Hình thức**
-- Làm theo nhóm (3-5 thành viên)
-- Agile / Scrum
-- 4 Sprint × 2 tuần
+**Format**
+- Group-based (3-5 members)
+- Agile / Scrum methodology
+- 4 Sprints × 2 weeks each
 
-**Bạn sẽ làm gì**
-- Phân tích yêu cầu
-- Thiết kế hệ thống
-- Code backend & frontend
-- Review – refactor – demo
+**Key Activities**
+- Requirement analysis and system design
+- Full-stack development (Backend & Frontend)
+- Regular reviews, refactoring, and demonstrations
 
 ---
 
-## 6. Đánh giá & điểm số
+## 6. Assessment & Grading
 
-### 6.1. Trọng số tổng thể
+### 6.1. Overall Weight Distribution
 
-| Hạng mục | Tỷ lệ |
+| Category | Weight |
 |-------|------|
-| Quiz & Assignment (Tuần 1–4) | ~30% |
+| Quizzes & Assignments (Weeks 1–4) | ~30% |
 | CPL Project | ~70% |
 
 ---
 
-### 6.2. Đánh giá CPL Project
+### 6.2. CPL Project Evaluation
 
-| Tiêu chí | Tỷ lệ |
+| Criteria | Weight |
 |--------|------|
-| Hoàn thành Sprint Goal | 30% |
-| Code quality & architecture | 30% |
-| Teamwork & Agile practice | 20% |
-| Demo & Phản biện | 20% |
+| Sprint Goal Completion | 30% |
+| Product Quality & Architecture | 30% |
+| Teamwork & Agile Practice | 20% |
+| Demo & Q&A | 20% |
 
 ---
 
-## 7. Vai trò & hoạt động chính
+## 7. Roles & Responsibilities
 
 ### 7.1. Trainer
-- Định hướng học tập
-- Tổ chức workshop
-- Review code & design
-- Đóng vai Product Owner trong Project
+- Learning direction and mentorship
+- Workshop facilitation
+- Code and design reviews
+- Acting as Product Owner for the CPL Project
 
-### 7.2. Học viên
-- Chủ động tự học
-- Hoàn thành assignment đúng hạn
-- Tham gia thảo luận & review
-- Chịu trách nhiệm cho phần việc của mình
-
----
-
-## 8. Kỳ vọng đối với học viên
-
-- Tinh thần **tự học & tự chịu trách nhiệm**
-- Không học đối phó, không copy-paste
-- Hỏi **đúng câu hỏi**, không hỏi thay tư duy
-- Sẵn sàng bị challenge & feedback thẳng
+### 7.2. Intern
+- Proactive self-learning
+- Timely assignment submission
+- Active participation in discussions and reviews
+- Personal accountability for assigned tasks
 
 ---
 
-## 9. Kết luận
+## 8. Program Expectations
 
-Chương trình này **không nhằm dạy thật nhiều kiến thức**, mà nhằm:
-- Giúp bạn **làm được việc**
-- Hiểu cách làm dự án phần mềm thực tế
-- Chuẩn bị sẵn sàng cho môi trường doanh nghiệp
+- Commitment to **self-learning & personal accountability**
+- Authentic effort: no copy-pasting without understanding
+- Asking **insightful questions** rather than seeking ready-made solutions
+- Readiness for **direct challenges & constructive feedback**
 
-> Nếu bạn nghiêm túc: chương trình sẽ rất giá trị  
-> Nếu bạn chỉ muốn “qua môn”: chương trình sẽ rất khó
+---
+
+## 9. Conclusion
+
+This program is designed not just to impart knowledge, but to:
+- Ensure **professional readiness**
+- Provide a deep understanding of real-world software projects
+- Prepare you for a professional enterprise environment
+
+> Serious commitment will yield significant value.  
+> Aiming only for completion will make the journey challenging.
 
 **Welcome & good luck!**
