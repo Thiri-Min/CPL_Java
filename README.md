@@ -7,6 +7,7 @@
 
 ## 1. Quick Overview
 
+- **AI-Augmented Learning:** Continuous integration of AI tools throughout the program to enhance productivity and problem-solving skills.
 - **Duration:** 12 weeks – 5 days/week  
 - **Daily Structure:**  
   - Morning (AM): Self-study, practice, and research.  
@@ -114,23 +115,15 @@
 
 ---
 
-### 3.7. AI Augmented for Students
+## 4. Training Methodology & AI Integration
 
-**Key Topics**
-- AI Prompting for coding, debugging, and testing
-- Limitations & risks of AI
-- Ethics & responsible usage
+### 4.1. The AI-Augmented Learning Model
 
-**Outcome**
-- Leveraging AI as a technical assistant
-- Maintaining integrity and avoiding over-reliance
+This program adopts an **AI-Augmented Learning** approach. AI is not just a topic but a **transversal method** used throughout all modules to accelerate learning and simulate modern professional workflows.
 
----
-
-## 4. Training Methodology
-
-### 4.1. Learning Model
-
+- **AI as a Technical Assistant (Continuous)**
+  - Using AI for explaining complex concepts, debugging code, and generating boilerplate or test cases.
+  - Mastering **Prompt Engineering** specific to software development.
 - **Self-learning (Primary)**  
   - Documentation, guides, and assignments.
 - **Trainer Guidance / Review**
@@ -139,6 +132,10 @@
   - Practical exercises and group discussions.
 - **Project-based Learning**
   - Applying all knowledge to the CPL Project.
+
+**Important Note on AI Usage:**
+- **Integrity First:** AI should be used to *understand*, not just to *complete*. You must be able to explain any code generated with AI assistance.
+- **Critical Thinking:** Always verify AI outputs. Understanding the limitations and risks of AI is a core part of the methodology.
 
 ---
 
@@ -174,6 +171,8 @@
 | Quizzes & Assignments (Weeks 1–4) | ~30% |
 | CPL Project | ~70% |
 
+*Note: Effective and ethical use of AI as a learning tool is evaluated as part of "Professionalism" across all categories.*
+
 ---
 
 ### 6.2. CPL Project Evaluation
@@ -196,7 +195,7 @@
 - Acting as Product Owner for the CPL Project
 
 ### 7.2. Intern
-- Proactive self-learning
+- Proactive self-learning & **responsible AI usage**
 - Timely assignment submission
 - Active participation in discussions and reviews
 - Personal accountability for assigned tasks
@@ -206,6 +205,7 @@
 ## 8. Program Expectations
 
 - Commitment to **self-learning & personal accountability**
+- **Effective AI Adoption:** Using AI as a catalyst for growth while maintaining code ownership
 - Authentic effort: no copy-pasting without understanding
 - Asking **insightful questions** rather than seeking ready-made solutions
 - Readiness for **direct challenges & constructive feedback**
