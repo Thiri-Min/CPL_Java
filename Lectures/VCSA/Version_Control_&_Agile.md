@@ -67,3 +67,5 @@ When integrated into project work, these practices ensure students learn not onl
 By integrating **Version Control** and **Agile** into project work:
 - Students don’t just learn coding—they learn *how to work like professional developers*.  
 - These practices ensure projects are organized, collaborative, and reflective of industry standards.
+
+---

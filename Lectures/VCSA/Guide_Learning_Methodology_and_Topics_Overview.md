@@ -61,6 +61,7 @@ This guide is designed to help learners follow an effective, structured, and sus
 - HTML: structure, semantics, accessibility
 - CSS: layout, responsive design, basic animations
 - JavaScript: variables, functions, DOM, events
+- Bootstrap
 
 ---
 

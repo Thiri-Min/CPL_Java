@@ -57,4 +57,3 @@ Default branch is main
 
 Line endings are configured
 
-Now you can create your first repository:

@@ -78,6 +78,7 @@ git add .
 
 ```python
 git commit -m "Initial portfolio upload"
+
 ```
 
 ## ⬆️ Step 7: Push Code to GitHub

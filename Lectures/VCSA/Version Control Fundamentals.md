@@ -52,3 +52,5 @@
 
 - A **preparation zone** where changes are collected before committing. 
 - Allows selective inclusion of changes in a commit.
+
+-----
