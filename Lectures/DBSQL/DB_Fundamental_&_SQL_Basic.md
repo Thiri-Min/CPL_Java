@@ -40,7 +40,7 @@ CREATE DATABASE PracticeDB;
 ```
 
 ### 3. SQL Basics (Learn in Order)
-###   3.1 Basic SELECT Queries
+### 3.1 Basic SELECT Queries
 
 ```bash
 SELECT * FROM students;
