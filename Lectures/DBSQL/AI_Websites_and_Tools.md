@@ -58,7 +58,7 @@ Example usage:
   - Beginner-friendly explanations
   - SQL and CS fundamentals
 
----
+-------
 
 ## 2.2 Codecademy (AI-Enhanced)
 - Website: https://www.codecademy.com/
@@ -170,6 +170,65 @@ Example usage:
 
 ---
 
+# 8. Website to practice for DBSQL
+
+### 1. W3Schools SQL
+
+- Website: https://www.w3schools.com/sql/
+
+- Good points;
+   - Very easy to follow
+
+  - Interactive SQL editor
+
+  - Covers SELECT, JOIN, GROUP BY, subqueries
+
+### 2. SQLZoo
+
+- Website: https://sqlzoo.net/
+
+- Good points: 
+   - Step-by-step exercises
+
+   - Great for learning joins and aggregation
+
+### 3. Mode SQL Tutorial
+
+- Website: https://mode.com/sql-tutorial/
+
+- Good Point:
+   - Clean explanations
+
+   - Real-world datasets
+
+### 4. LeetCode (Database section)
+
+- Website: https://leetcode.com/problemset/database/
+
+- Good Point: 
+    - Real interview-style SQL problems
+
+    - Covers joins, window functions, complex queries
+
+### 5. HackerRank – SQL
+
+- Website: https://www.hackerrank.com/domains/sql
+
+- Good Point: 
+    - Structured by difficulty (Basic → Advanced)
+
+    - Very popular for job prep
+
+### 6. SQLBolt
+
+- Website: https://sqlbolt.com/
+
+- Good Point: 
+     - Short lessons + immediate practice
+
+     - Excellent for quick refresh
+
+---------
 ## ✅ Final Advice
 > AI is a **learning assistant**, not a shortcut.
 
