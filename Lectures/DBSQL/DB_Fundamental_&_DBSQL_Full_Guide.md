@@ -36,15 +36,18 @@ Learn and understand:
 - MySQL Workbench
 
 ### MS SQL Server
-- SQL Server Express
 - SQL Server Management Studio (SSMS)
 
 Create a practice database:
 ```sql
 CREATE DATABASE PracticeDB;
+```
+
+Create tables such as students, courses, lecturer and etc..
 
 ### 3. SQL Basics (CRUD Operations)
 ### 3.1 SELECT Queries
+
 ```
 SELECT * FROM students;
 SELECT name, age FROM students;
@@ -180,22 +183,22 @@ Tables:
 
 Tasks:
 
-Write JOIN queries
+- Write JOIN queries
 
-Use aggregation for reports
+- Use aggregation for reports
 
-Apply filtering & subqueries
+- Apply filtering & subqueries
 
 ✅ Final Outcome
 
 By completing this guide, you can:
 
-Design relational databases
+- Design relational databases
 
-Write complex SQL queries
+- Write complex SQL queries
 
-Use joins, subqueries, and CTEs
+- Use joins, subqueries, and CTEs
 
-Create views and indexes
+- Create views and indexes
 
-Analyze real-world datasets
+- Analyze real-world datasets
