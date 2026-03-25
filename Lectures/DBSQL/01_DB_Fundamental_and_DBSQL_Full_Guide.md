@@ -77,7 +77,7 @@ CREATE TABLE students (
 );
 ```
 
-5. Aggregation Functions (Basics)
+### 5. Aggregation Functions (Basics)
 - COUNT
 - SUM
 - AVG

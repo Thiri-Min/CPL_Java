@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .view-selector {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        select {
+            padding: 8px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        select:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .clocks-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .clock-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .clock-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .city-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .digital-time {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+
+        .digital-date {
+            text-align: center;
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .analog-clock {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            position: relative;
+            border: 8px solid #667eea;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1) inset;
+        }
+
+        .clock-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            background: #333;
+            border-radius: 10px;
+        }
+
+        .hour-hand {
+            width: 6px;
+            height: 50px;
+            margin-left: -3px;
+            background: #333;
+        }
+
+        .minute-hand {
+            width: 4px;
+            height: 70px;
+            margin-left: -2px;
+            background: #666;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 80px;
+            margin-left: -1px;
+            background: #e74c3c;
+        }
+
+        .clock-numbers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .clock-number {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .clock-number span {
+            display: inline-block;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌍 World Clock</h1>
+        <div class="view-selector">
+            <label for="viewType" style="color: white; margin-right: 10px; font-weight: bold;">Display Mode:</label>
+            <select id="viewType" onchange="changeView()">
+                <option value="digital">Digital</option>
+                <option value="analog">Analog</option>
+                <option value="both">Both</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="clocks-container" id="clocksContainer"></div>
+
+    <script>
+        const timezones = [
+            { city: 'Hanoi, Vietnam', timezone: 'Asia/Ho_Chi_Minh', flag: '🇻🇳' },
+            { city: 'Yangon, Myanmar', timezone: 'Asia/Yangon', flag: '🇲🇲' },
+            { city: 'Seoul, Korea', timezone: 'Asia/Seoul', flag: '🇰🇷' },
+            { city: 'Tokyo, Japan', timezone: 'Asia/Tokyo', flag: '🇯🇵' },
+            { city: 'Singapore', timezone: 'Asia/Singapore', flag: '🇸🇬' },
+            { city: 'Kuala Lumpur, Malaysia', timezone: 'Asia/Kuala_Lumpur', flag: '🇲🇾' }
+        ];
+
+        let currentView = 'digital';
+
+        function createClockHTML(tz) {
+            return `
+                <div class="clock-card">
+                    <div class="city-name">${tz.flag} ${tz.city}</div>
+                    <div class="digital-display">
+                        <div class="digital-time" id="time-${tz.timezone}"></div>
+                        <div class="digital-date" id="date-${tz.timezone}"></div>
+                    </div>
+                    <div class="analog-display hidden">
+                        <div class="analog-clock">
+                            <div class="clock-numbers" id="numbers-${tz.timezone}"></div>
+                            <div class="hand hour-hand" id="hour-${tz.timezone}"></div>
+                            <div class="hand minute-hand" id="minute-${tz.timezone}"></div>
+                            <div class="hand second-hand" id="second-${tz.timezone}"></div>
+                            <div class="clock-center"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function initClocks() {
+            const container = document.getElementById('clocksContainer');
+            container.innerHTML = timezones.map(tz => createClockHTML(tz)).join('');
+            
+            timezones.forEach(tz => {
+                const numbersDiv = document.getElementById(`numbers-${tz.timezone}`);
+                for (let i = 1; i <= 12; i++) {
+                    const numberDiv = document.createElement('div');
+                    numberDiv.className = 'clock-number';
+                    numberDiv.style.transform = `rotate(${i * 30}deg)`;
+                    numberDiv.innerHTML = `<span style="transform: rotate(-${i * 30}deg); display: inline-block;">${i}</span>`;
+                    numbersDiv.appendChild(numberDiv);
+                }
+            });
+        }
+
+        function updateClocks() {
+            timezones.forEach(tz => {
+                const now = new Date();
+                const options = { timeZone: tz.timezone };
+                
+                const timeStr = now.toLocaleTimeString('en-US', {
+                    ...options,
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                
+                const dateStr = now.toLocaleDateString('en-US', {
+                    ...options,
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                const timeEl = document.getElementById(`time-${tz.timezone}`);
+                const dateEl = document.getElementById(`date-${tz.timezone}`);
+                
+                if (timeEl) timeEl.textContent = timeStr;
+                if (dateEl) dateEl.textContent = dateStr;
+
+                const localTime = new Date(now.toLocaleString('en-US', options));
+                const hours = localTime.getHours();
+                const minutes = localTime.getMinutes();
+                const seconds = localTime.getSeconds();
+
+                const hourHand = document.getElementById(`hour-${tz.timezone}`);
+                const minuteHand = document.getElementById(`minute-${tz.timezone}`);
+                const secondHand = document.getElementById(`second-${tz.timezone}`);
+
+                if (hourHand) {
+                    const hourDeg = (hours % 12) * 30 + minutes * 0.5;
+                    hourHand.style.transform = `rotate(${hourDeg}deg)`;
+                }
+
+                if (minuteHand) {
+                    const minuteDeg = minutes * 6 + seconds * 0.1;
+                    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+                }
+
+                if (secondHand) {
+                    const secondDeg = seconds * 6;
+                    secondHand.style.transform = `rotate(${secondDeg}deg)`;
+                }
+            });
+        }
+
+        function changeView() {
+            currentView = document.getElementById('viewType').value;
+            const digitalDisplays = document.querySelectorAll('.digital-display');
+            const analogDisplays = document.querySelectorAll('.analog-display');
+
+            digitalDisplays.forEach(el => {
+                if (currentView === 'analog') {
+                    el.classList.add('hidden');
+                } else {
+                    el.classList.remove('hidden');
+                }
+            });
+
+            analogDisplays.forEach(el => {
+                if (currentView === 'digital') {
+                    el.classList.add('hidden');
+                } else {
+                    el.classList.remove('hidden');
+                }
+            });
+        }
+
+        initClocks();
+        updateClocks();
+        setInterval(updateClocks, 1000);
+    </script>
+</body>
+</html>

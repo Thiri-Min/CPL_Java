@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: rgb(115, 9, 101);
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    color: rgb(118, 13, 179);
+}
+
+button {
+    background-color: rgb(175, 142, 80);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(200, 121, 24);
+}

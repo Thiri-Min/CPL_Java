@@ -29,7 +29,26 @@ FROM student s
 LEFT JOIN enrollment e ON s.student_id = e.student_id;
 ```
 
-### 1.3 GROUP BY
+### 1.3 RIGHT JOIN
+
+Returns all rows from the right table and matching rows from the left table.
+
+```
+SELECT s.student_name, e.course_id
+FROM student s
+RIGHT JOIN enrollment e ON s.student_id = e.student_id;
+```
+
+### 1.4 FULL OUTER JOIN
+Returns all rows when there is a match in one of the tables. Unmatched rows from either side will show NULLs.
+
+```
+SELECT s.student_name, e.course_id
+FROM student s
+FULL OUTER JOIN enrollment e ON s.student_id = e.student_id;
+```
+
+### 1.5 GROUP BY
 
 Groups rows to perform aggregation.
 ```
@@ -38,7 +57,7 @@ FROM enrollment
 GROUP BY course_id;
 ```
 
-### 1.4 HAVING
+### 1.6 HAVING
 
 Filters aggregated results (used with GROUP BY).
 ```
@@ -53,7 +72,7 @@ HAVING COUNT(*) > 5;
 
 - HAVING → filters groups
 
-### 1.5 Aggregation Functions
+### 1.7 Aggregation Functions
 
 Common functions:
 
@@ -66,7 +85,7 @@ Common functions:
 ```
 SELECT AVG(grade) FROM enrollment;
 ```
-### 1.6 Common Table Expression (CTE)
+### 1.8 Common Table Expression (CTE)
 
 A temporary named result set used for complex queries.
 ```
@@ -83,7 +102,7 @@ WHERE grade > (SELECT avg_grade FROM AvgGrade);
 - Improves readability
 - Simplifies complex logic
 
-## 1.7 Views
+## 1.9 Views
 A stored query that behaves like a table.
 
 ```
@@ -188,3 +207,12 @@ After studying this module, you should understand:
 - Index basics and performance concepts
 
 - How transactions protect data integrity
+
+## 🔗 Practice Websites
+- [SQLZoo](https://sqlzoo.net/) – Interactive SQL tutorials and exercises  
+- [LeetCode SQL](https://leetcode.com/problemset/database/) – SQL challenges for practice  
+- [Mode Analytics SQL Tutorial](https://mode.com/sql-tutorial/) – Beginner to advanced SQL lessons  
+- [Hackerrank SQL](https://www.hackerrank.com/domains/sql) – Practice problems with difficulty levels  
+- [W3Schools SQL](https://www.w3schools.com/sql/) – Quick reference and examples  
+
+---
