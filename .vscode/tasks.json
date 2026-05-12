@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Maven: Spring Boot Run",
+            "type": "shell",
+            "command": "mvn spring-boot:run",
+            "options": {
+                "cwd": "${workspaceFolder}/demo"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Maven: Clean Package",
+            "type": "shell",
+            "command": "mvn clean package",
+            "options": {
+                "cwd": "${workspaceFolder}/demo"
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Maven: Test",
+            "type": "shell",
+            "command": "mvn test",
+            "options": {
+                "cwd": "${workspaceFolder}/demo"
+            },
+            "group": "test",
+            "problemMatcher": []
+        }
+    ]
+}

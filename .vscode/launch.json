@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run DemoApplication",
+            "request": "launch",
+            "mainClass": "com.training.demo.DemoApplication",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
+            "name": "Debug Current Java File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }
+    ]
+}
