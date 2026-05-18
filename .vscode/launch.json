@@ -6,7 +6,17 @@
             "name": "Run DemoApplication",
             "request": "launch",
             "mainClass": "com.training.demo.DemoApplication",
-            "projectName": "demo"
+            "projectName": "demo",
+            "cwd": "${workspaceFolder}/demo",
+            "preLaunchTask": "Maven: Compile demo"
+        },
+        {
+            "type": "java",
+            "name": "Run DemoApplication (no pre-task)",
+            "request": "launch",
+            "mainClass": "com.training.demo.DemoApplication",
+            "projectName": "demo",
+            "cwd": "${workspaceFolder}/demo"
         },
         {
             "type": "java",

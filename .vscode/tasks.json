@@ -2,9 +2,21 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Maven: Compile demo",
+            "type": "shell",
+            "command": ".\\mvnw.cmd",
+            "args": ["compile", "-DskipTests"],
+            "options": {
+                "cwd": "${workspaceFolder}/demo"
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Maven: Spring Boot Run",
             "type": "shell",
-            "command": "mvn spring-boot:run",
+            "command": ".\\mvnw.cmd",
+            "args": ["spring-boot:run"],
             "options": {
                 "cwd": "${workspaceFolder}/demo"
             },
@@ -17,7 +29,8 @@
         {
             "label": "Maven: Clean Package",
             "type": "shell",
-            "command": "mvn clean package",
+            "command": ".\\mvnw.cmd",
+            "args": ["clean", "package"],
             "options": {
                 "cwd": "${workspaceFolder}/demo"
             },
@@ -27,7 +40,8 @@
         {
             "label": "Maven: Test",
             "type": "shell",
-            "command": "mvn test",
+            "command": ".\\mvnw.cmd",
+            "args": ["test"],
             "options": {
                 "cwd": "${workspaceFolder}/demo"
             },
