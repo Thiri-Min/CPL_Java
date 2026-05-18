@@ -1,0 +1,14 @@
+# Deploy on https://render.com — connect this GitHub repo, then "New Blueprint".
+services:
+  - type: web
+    name: cpl-java-lms
+    runtime: docker
+    rootDir: demo
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /login
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: PORT
+        value: "8080"
