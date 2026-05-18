@@ -12,6 +12,9 @@
             font-family: 'Roboto', sans-serif;
             background-color: #f0f4f8;
             color: #334155;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .gradient-header {
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
@@ -113,7 +116,22 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 -mt-6 relative z-20">
+    <main class="max-w-5xl mx-auto px-4 -mt-6 relative z-20 flex-grow">
+
+        <!-- User Profile Favorites -->
+        <section id="user-profile" class="mb-20">
+            <div class="bg-white rounded-2xl p-8 card-shadow border-l-8 border-violet-600">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">My Profile</h2>
+                        <p class="text-sm text-gray-600">Favourite courses will be saved here for quick access.</p>
+                    </div>
+                    <span class="text-xs uppercase font-semibold text-violet-700 bg-violet-100 px-3 py-2 rounded-full">Favorites</span>
+                </div>
+                <div id="favorite-list" class="grid gap-4 md:grid-cols-3"></div>
+                <p id="favorites-empty" class="text-sm text-gray-500">No favourite courses yet. Click Favourite on a course card to add it here.</p>
+            </div>
+        </section>
 
         <!-- Daily Routine Section -->
         <section class="mb-20">
@@ -432,7 +450,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="text-center text-gray-500 pb-8">
+        <footer class="text-center text-gray-500 pb-8 mt-auto">
             <p class="mb-2 italic">"This program is designed not just to impart knowledge but to ensure professional readiness."</p>
             <p class="font-bold text-gray-800 text-lg uppercase">Welcome & Good Luck!</p>
             <div class="mt-4 no-print">
@@ -443,6 +461,558 @@
         </footer>
 
     </main>
+
+    <!-- Course Detail Page -->
+    <section id="course-detail-section" class="hidden mb-20 mx-auto max-w-5xl px-4">
+        <div class="bg-white rounded-2xl p-8 card-shadow">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+                <div>
+                    <h2 id="course-detail-title" class="text-3xl font-bold text-gray-800"></h2>
+                    <p id="course-detail-subtitle" class="text-sm text-gray-600 mt-2"></p>
+                </div>
+                <button onclick="closeCourseDetail()" class="bg-slate-900 text-white px-5 py-3 rounded-full hover:bg-slate-700 transition">Back to courses</button>
+            </div>
+            <div class="grid gap-8 lg:grid-cols-[2fr_1fr]">
+                <div>
+                    <div class="mb-6 text-sm text-gray-700 space-y-2">
+                        <div><strong>Author:</strong> <span id="course-author"></span></div>
+                        <div><strong>Website:</strong> <a id="course-website" href="#" target="_blank" class="text-blue-600 hover:underline"></a></div>
+                        <div><strong>Example demo:</strong> <a id="course-demo" href="#" target="_blank" class="text-blue-600 hover:underline"></a></div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl p-5 mb-8 border border-slate-200">
+                        <h3 class="font-bold text-xl mb-3">Java Code Example</h3>
+                        <pre id="course-code" class="whitespace-pre-wrap text-sm bg-white p-4 rounded-xl border border-slate-200 overflow-x-auto"></pre>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                        <h3 class="font-bold text-xl mb-3">Practice Area</h3>
+                        <p class="text-sm text-gray-600 mb-4">Enter input and click Run to preview output for this Java example.</p>
+                        <label class="block text-sm font-semibold mb-2" for="practice-input">Input</label>
+                        <textarea id="practice-input" rows="4" class="w-full border border-slate-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Enter sample input here..."></textarea>
+                        <button onclick="runJavaExample()" class="bg-teal-600 text-white px-5 py-3 rounded-full hover:bg-teal-700 transition">Run Example</button>
+                        <div class="mt-5 rounded-xl border border-slate-200 bg-white p-4">
+                            <div class="text-xs uppercase tracking-wide text-slate-500 mb-2">Output</div>
+                            <pre id="practice-output" class="whitespace-pre-wrap text-sm text-slate-800 min-h-[120px]"></pre>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3">Note: This is a browser preview for learning. Use a Java compiler for real execution.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 card-shadow">
+                    <h3 class="font-bold text-xl mb-4">Related resources</h3>
+                    <ul id="course-links" class="space-y-3 text-sm text-gray-700"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Modal/Section -->
+    <div id="quiz-section" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <!-- Quiz Header -->
+            <div class="bg-blue-600 text-white p-4 flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold">Java Skill Assessment</h2>
+                    <p class="text-sm opacity-90">Test your Java knowledge across 3 levels</p>
+                </div>
+                <div class="text-right">
+                    <div id="timer" class="text-lg font-mono">20:00</div>
+                    <div class="text-sm">Time Remaining</div>
+                </div>
+            </div>
+
+            <!-- Quiz Content -->
+            <div class="p-6 overflow-y-auto max-h-[60vh]">
+                <div id="question-container">
+                    <!-- Questions will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Quiz Footer -->
+            <div class="bg-gray-50 p-4 flex justify-between items-center">
+                <button id="prev-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg disabled:opacity-50" disabled>
+                    <i class="fas fa-arrow-left mr-2"></i> Previous
+                </button>
+                <div class="text-sm text-gray-600">
+                    Question <span id="current-question">1</span> of <span id="total-questions">10</span>
+                </div>
+                <button id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+                <button id="submit-btn" class="hidden bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                    Submit Test <i class="fas fa-check ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="results-section" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 p-8 text-center">
+            <div id="results-content">
+                <!-- Results will be shown here -->
+            </div>
+            <button onclick="closeQuiz()" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Featured courses and user profile
+        const featuredCourses = [
+            {
+                id: 'java-basic',
+                title: 'Java Basic',
+                subtitle: 'Start with Java syntax, variables, and simple console programs.',
+                author: 'W3Schools-style tutorial',
+                website: 'https://www.w3schools.com/java/',
+                demo: 'https://www.w3schools.com/java/java_syntax.asp',
+                description: 'Learn Java basics with examples, quick syntax guides, and hands-on practice for beginner developers.',
+                exampleCode: 'public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println("Hello, Java World!");\n    }\n}',
+                sampleExample: 'This example prints a welcome message when run.',
+                practiceHint: 'Enter a name or leave blank to use the default greeting.'
+            },
+            {
+                id: 'java-oop',
+                title: 'Java OOP',
+                subtitle: 'Explore classes, objects, inheritance and encapsulation.',
+                author: 'W3Schools-style tutorial',
+                website: 'https://www.w3schools.com/java/java_object_oriented.asp',
+                demo: 'https://www.w3schools.com/java/java_classes.asp',
+                description: 'Understand object-oriented programming in Java and build reusable class-based solutions.',
+                exampleCode: 'class Animal {\n    String name;\n    void speak() {\n        System.out.println(name + " makes a sound.");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Animal cat = new Animal();\n        cat.name = "Cat";\n        cat.speak();\n    }\n}',
+                sampleExample: 'This example shows a simple class and method call in Java.',
+                practiceHint: 'Enter any animal name to see how the object speaks.'
+            },
+            {
+                id: 'java-collections',
+                title: 'Java Collections',
+                subtitle: 'Practice Lists, Maps, and loops with real Java examples.',
+                author: 'W3Schools-style tutorial',
+                website: 'https://www.w3schools.com/java/java_collections.asp',
+                demo: 'https://www.w3schools.com/java/java_arraylist.asp',
+                description: 'Learn how Java collections store and iterate data, including ArrayList, HashMap, and for-each loops.',
+                exampleCode: 'import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<String> list = new ArrayList<>();\n        list.add("Java");\n        list.add("OOP");\n        list.add("Collections");\n        for (String item : list) {\n            System.out.println(item);\n        }\n    }\n}',
+                sampleExample: 'This example prints three elements from an ArrayList.',
+                practiceHint: 'Enter a word to add to the example list output.'
+            }
+        ];
+
+        let favoriteCourses = [];
+        let currentCourseId = null;
+
+        function renderFeaturedCourses() {
+            const featuredContainer = document.getElementById('featured-courses');
+            featuredContainer.innerHTML = featuredCourses.map(course => {
+                const isFavorite = favoriteCourses.some(item => item.id === course.id);
+                return `
+                <div class="bg-white rounded-3xl p-6 card-shadow border border-slate-200 flex flex-col">
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">${course.title}</h3>
+                            <p class="text-sm text-gray-500 mt-2">${course.subtitle}</p>
+                        </div>
+                        <div class="text-slate-400 text-2xl">📘</div>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-6">${course.description}</p>
+                    <div class="mt-auto pt-4 border-t border-slate-200 flex flex-col gap-3 sm:flex-row">
+                        <button onclick="toggleFavorite('${course.id}')" class="w-full sm:w-auto ${isFavorite ? 'bg-slate-200 text-slate-800 hover:bg-slate-300' : 'bg-violet-600 text-white hover:bg-violet-700'} font-semibold px-4 py-3 rounded-full transition">${isFavorite ? 'Remove' : 'Favourite'}</button>
+                        <button onclick="showCourseDetail('${course.id}')" class="w-full sm:w-auto border border-slate-300 text-slate-700 font-semibold px-4 py-3 rounded-full hover:bg-slate-100 transition">Read</button>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function renderFavorites() {
+            const list = document.getElementById('favorite-list');
+            const emptyMessage = document.getElementById('favorites-empty');
+            if (favoriteCourses.length === 0) {
+                list.innerHTML = '';
+                emptyMessage.classList.remove('hidden');
+                return;
+            }
+            emptyMessage.classList.add('hidden');
+            list.innerHTML = favoriteCourses.map(course => `
+                <div class="bg-slate-50 rounded-3xl p-5 border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">${course.title}</h3>
+                        <p class="text-sm text-gray-500 mt-2">${course.subtitle}</p>
+                        <p class="text-xs text-slate-400 mt-4">Author: ${course.author}</p>
+                    </div>
+                    <button onclick="showCourseDetail('${course.id}')" class="mt-6 w-full bg-teal-600 text-white py-3 rounded-full hover:bg-teal-700 transition">Open Course</button>
+                </div>
+            `).join('');
+        }
+
+        function toggleFavorite(courseId) {
+            const course = featuredCourses.find(item => item.id === courseId);
+            if (!course) return;
+
+            if (favoriteCourses.some(item => item.id === courseId)) {
+                favoriteCourses = favoriteCourses.filter(item => item.id !== courseId);
+            } else {
+                favoriteCourses.push(course);
+            }
+
+            renderFavorites();
+            renderFeaturedCourses();
+        }
+
+        function showCourseDetail(courseId) {
+            const course = featuredCourses.find(item => item.id === courseId);
+            if (!course) return;
+            currentCourseId = courseId;
+
+            document.querySelector('main').classList.add('hidden');
+            document.getElementById('course-detail-section').classList.remove('hidden');
+
+            document.getElementById('course-detail-title').textContent = course.title;
+            document.getElementById('course-detail-subtitle').textContent = course.subtitle;
+            document.getElementById('course-author').textContent = course.author;
+            document.getElementById('course-website').textContent = course.website;
+            document.getElementById('course-website').href = course.website;
+            document.getElementById('course-demo').textContent = 'Open demo';
+            document.getElementById('course-demo').href = course.demo;
+            document.getElementById('course-code').textContent = course.exampleCode;
+            document.getElementById('practice-input').value = '';
+            document.getElementById('practice-output').textContent = course.practiceHint;
+
+            const links = [
+                { label: 'Java Tutorial', url: course.website },
+                { label: 'Example Demo', url: course.demo },
+                { label: 'Practice using Java compiler', url: course.website }
+            ];
+            document.getElementById('course-links').innerHTML = links.map(link => `
+                <li class="rounded-2xl bg-white p-4 border border-slate-200">
+                    <a href="${link.url}" target="_blank" class="font-semibold text-slate-900 hover:text-teal-600">${link.label}</a>
+                </li>
+            `).join('');
+        }
+
+        function closeCourseDetail() {
+            document.getElementById('course-detail-section').classList.add('hidden');
+            document.querySelector('main').classList.remove('hidden');
+            currentCourseId = null;
+        }
+
+        function runJavaExample() {
+            if (!currentCourseId) return;
+            const input = document.getElementById('practice-input').value.trim();
+            let output = '';
+            if (currentCourseId === 'java-basic') {
+                output = input ? `Hello, ${input}!` : 'Hello, Java World!';
+            } else if (currentCourseId === 'java-oop') {
+                output = input ? `${input} makes a sound.` : 'Cat makes a sound.';
+            } else if (currentCourseId === 'java-collections') {
+                const added = input ? `, ${input}` : '';
+                output = `Java, OOP, Collections${added}`;
+            }
+            document.getElementById('practice-output').textContent = output;
+        }
+
+        renderFeaturedCourses();
+        renderFavorites();
+
+        // Quiz Data
+        const quizQuestions = [
+            // Level 1: Pre-intermediate
+            {
+                level: 1,
+                question: "What is the correct syntax for a Java main method?",
+                options: ["public static void main(String[] args)", "public void main(String args[])", "static public void main(String[] args)", "void main(String[] args)"],
+                correct: 0,
+                explanation: "The main method in Java must be public, static, void, and take a String array as parameter."
+            },
+            {
+                level: 1,
+                question: "Which of these is NOT a valid Java identifier?",
+                options: ["myVariable", "_private", "123number", "$dollar"],
+                correct: 2,
+                explanation: "Java identifiers cannot start with a number. They can start with letters, underscore, or dollar sign."
+            },
+            {
+                level: 1,
+                question: "What does the 'public' access modifier mean?",
+                options: ["Accessible only within the same class", "Accessible within the same package", "Accessible from anywhere", "Accessible only by subclasses"],
+                correct: 2,
+                explanation: "Public members are accessible from any class in any package."
+            },
+            {
+                level: 1,
+                question: "Which operator is used for string concatenation in Java?",
+                options: ["+", "&", ".", "||"],
+                correct: 0,
+                explanation: "The + operator is overloaded for string concatenation in Java."
+            },
+
+            // Level 2: Intermediate
+            {
+                level: 2,
+                question: "What is method overloading in Java?",
+                options: ["Having multiple methods with the same name but different parameters", "Calling a method from another method", "Overriding a method in a subclass", "Creating multiple instances of a method"],
+                correct: 0,
+                explanation: "Method overloading allows multiple methods with the same name but different parameter lists."
+            },
+            {
+                level: 2,
+                question: "Which collection class maintains insertion order?",
+                options: ["HashSet", "HashMap", "LinkedHashSet", "TreeSet"],
+                correct: 2,
+                explanation: "LinkedHashSet maintains the insertion order of elements."
+            },
+            {
+                level: 2,
+                question: "What is the purpose of the 'finally' block in try-catch-finally?",
+                options: ["To catch exceptions", "To execute code regardless of whether an exception occurs", "To throw exceptions", "To ignore exceptions"],
+                correct: 1,
+                explanation: "The finally block executes regardless of whether an exception is thrown or caught."
+            },
+            {
+                level: 2,
+                question: "Which interface should be implemented for custom sorting?",
+                options: ["Runnable", "Comparable", "Serializable", "Cloneable"],
+                correct: 1,
+                explanation: "Comparable interface provides a natural ordering for objects."
+            },
+
+            // Level 3: Advanced
+            {
+                level: 3,
+                question: "What is the difference between HashMap and ConcurrentHashMap?",
+                options: ["HashMap is synchronized, ConcurrentHashMap is not", "ConcurrentHashMap allows concurrent access, HashMap does not", "They are identical", "HashMap is thread-safe, ConcurrentHashMap is not"],
+                correct: 1,
+                explanation: "ConcurrentHashMap is designed for concurrent access and provides better performance in multi-threaded environments."
+            },
+            {
+                level: 3,
+                question: "What does the 'volatile' keyword ensure in Java?",
+                options: ["The variable cannot be changed", "Changes to the variable are visible to all threads", "The variable is stored in volatile memory", "The variable cannot be garbage collected"],
+                correct: 1,
+                explanation: "Volatile ensures that changes to a variable are immediately visible to all threads."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizQuestions.length).fill(null);
+        let timer;
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+
+        // DOM Elements
+        const quizSection = document.getElementById('quiz-section');
+        const resultsSection = document.getElementById('results-section');
+        const questionContainer = document.getElementById('question-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        const timerElement = document.getElementById('timer');
+
+        // Initialize quiz
+        function startQuiz() {
+            document.querySelector('main').classList.add('hidden');
+            document.querySelector('header').classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            currentQuestionIndex = 0;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+            timeLeft = 20 * 60;
+            startTimer();
+            showQuestion();
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft < 300) { // Less than 5 minutes
+                timerElement.classList.add('text-red-500');
+            }
+        }
+
+        // Show current question
+        function showQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+            const levelText = question.level === 1 ? 'Pre-intermediate' : question.level === 2 ? 'Intermediate' : 'Advanced';
+            const levelColor = question.level === 1 ? 'green' : question.level === 2 ? 'yellow' : 'red';
+            
+            questionContainer.innerHTML = `
+                <div class="mb-4">
+                    <span class="inline-block bg-${levelColor}-100 text-${levelColor}-800 text-xs font-bold px-2 py-1 rounded">
+                        Level ${question.level}: ${levelText}
+                    </span>
+                </div>
+                <h3 class="text-lg font-semibold mb-6">${question.question}</h3>
+                <div class="space-y-3">
+                    ${question.options.map((option, index) => `
+                        <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input type="radio" name="answer" value="${index}" 
+                                   ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''} 
+                                   class="mr-3">
+                            <span>${option}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+
+            currentQuestionSpan.textContent = currentQuestionIndex + 1;
+            totalQuestionsSpan.textContent = quizQuestions.length;
+
+            // Update button states
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            submitBtn.classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
+
+            // Add event listeners to radio buttons
+            document.querySelectorAll('input[name="answer"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    userAnswers[currentQuestionIndex] = parseInt(e.target.value);
+                });
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizSection.classList.add('hidden');
+            showResults();
+        }
+
+        // Show results
+        function showResults() {
+            let correct = 0;
+            let levelScores = {1: 0, 2: 0, 3: 0};
+            let levelCounts = {1: 0, 2: 0, 3: 0};
+
+            quizQuestions.forEach((question, index) => {
+                levelCounts[question.level]++;
+                if (userAnswers[index] === question.correct) {
+                    correct++;
+                    levelScores[question.level]++;
+                }
+            });
+
+            const percentage = Math.round((correct / quizQuestions.length) * 100);
+            let grade, message, color;
+
+            if (percentage >= 90) {
+                grade = 'A';
+                message = 'Excellent! You have outstanding Java knowledge.';
+                color = 'text-green-600';
+            } else if (percentage >= 80) {
+                grade = 'B';
+                message = 'Very Good! You have strong Java skills.';
+                color = 'text-blue-600';
+            } else if (percentage >= 70) {
+                grade = 'C';
+                message = 'Good! You have solid Java fundamentals.';
+                color = 'text-yellow-600';
+            } else if (percentage >= 60) {
+                grade = 'D';
+                message = 'Fair! You need to strengthen your Java knowledge.';
+                color = 'text-orange-600';
+            } else {
+                grade = 'F';
+                message = 'Needs Improvement! Consider reviewing Java basics.';
+                color = 'text-red-600';
+            }
+
+            resultsSection.classList.remove('hidden');
+            document.getElementById('results-content').innerHTML = `
+                <div class="mb-6">
+                    <div class="text-6xl mb-4 ${color}">🎓</div>
+                    <h2 class="text-3xl font-bold mb-2">Test Complete!</h2>
+                    <div class="text-5xl font-bold ${color} mb-2">${grade}</div>
+                    <p class="text-xl text-gray-600 mb-4">${percentage}% (${correct}/${quizQuestions.length})</p>
+                    <p class="text-lg mb-6">${message}</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <div class="text-green-600 font-bold">Pre-intermediate</div>
+                        <div class="text-2xl font-bold">${levelScores[1]}/${levelCounts[1]}</div>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <div class="text-yellow-600 font-bold">Intermediate</div>
+                        <div class="text-2xl font-bold">${levelScores[2]}/${levelCounts[2]}</div>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <div class="text-red-600 font-bold">Advanced</div>
+                        <div class="text-2xl font-bold">${levelScores[3]}/${levelCounts[3]}</div>
+                    </div>
+                </div>
+                
+                <div class="text-left bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-bold mb-2">Review your answers:</h3>
+                    <div class="space-y-2 max-h-40 overflow-y-auto">
+                        ${quizQuestions.map((q, i) => `
+                            <div class="text-sm ${userAnswers[i] === q.correct ? 'text-green-600' : 'text-red-600'}">
+                                Q${i+1}: ${userAnswers[i] === q.correct ? '✓' : '✗'} ${q.question.substring(0, 50)}...
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Close quiz and return to main page
+        function closeQuiz() {
+            resultsSection.classList.add('hidden');
+            document.querySelector('main').classList.remove('hidden');
+            document.querySelector('header').classList.remove('hidden');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add Start Test button to the assessment section
+            const assessmentSection = document.querySelector('section.mb-20').nextElementSibling;
+            const startTestBtn = document.createElement('button');
+            startTestBtn.innerHTML = '<i class="fas fa-play mr-2"></i> Start Java Test';
+            startTestBtn.className = 'bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300';
+            startTestBtn.onclick = startQuiz;
+            
+            const assessmentContainer = assessmentSection.querySelector('.grid');
+            assessmentContainer.insertAdjacentElement('afterend', startTestBtn);
+            startTestBtn.classList.add('text-center', 'mt-8');
+
+            // Quiz navigation
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            submitBtn.addEventListener('click', submitQuiz);
+        });
+    </script>
 
 </body>
 </html>
