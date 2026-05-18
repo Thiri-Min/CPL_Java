@@ -1,4 +1,6 @@
-# Deploy on https://render.com — connect this GitHub repo, then "New Blueprint".
+# Public LMS (DemoApplication) — deploy at https://render.com
+# 1. Sign in with GitHub  2. New → Blueprint  3. Select Thiri-Min/CPL_Java
+# 4. After deploy, share the *.onrender.com URL with everyone
 services:
   - type: web
     name: cpl-java-lms
@@ -6,9 +8,9 @@ services:
     rootDir: demo
     dockerfilePath: ./Dockerfile
     plan: free
-    healthCheckPath: /login
+    healthCheckPath: /
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: PORT
-        value: "8080"
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx512m
