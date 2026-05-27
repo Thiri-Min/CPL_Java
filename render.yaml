@@ -19,8 +19,8 @@ services:
         value: -Xmx384m -XX:+UseSerialGC
       # Admin login (created/reset on each deploy when using in-memory H2)
       - key: ADMIN_USERNAME
-        value: thirimin
+        value: thiri
       - key: ADMIN_EMAIL
         value: thirithiriminmin@gmail.com
       - key: ADMIN_PASSWORD
-        value: Admin@123456
+        value: "111"
